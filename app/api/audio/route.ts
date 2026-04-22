@@ -2,6 +2,11 @@ import ytdl from '@distube/ytdl-core';
 
 export const maxDuration = 60;
 
+function cookieHeaders(): Record<string, string> {
+  const cookies = process.env.YOUTUBE_COOKIES;
+  return cookies ? { cookie: cookies } : {};
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const url = searchParams.get('url');
@@ -18,13 +23,14 @@ export async function GET(request: Request) {
   }
 
   try {
-    const info = await ytdl.getInfo(url);
+    const reqOpts = { requestOptions: { headers: cookieHeaders() } };
+    const info = await ytdl.getInfo(url, reqOpts);
     const format = ytdl.chooseFormat(info.formats, {
       quality: 'highestaudio',
       filter: 'audioonly',
     });
 
-    const audioStream = ytdl.downloadFromInfo(info, { format });
+    const audioStream = ytdl.downloadFromInfo(info, { format, ...reqOpts });
 
     const webStream = new ReadableStream({
       start(controller) {
@@ -56,9 +62,10 @@ export async function GET(request: Request) {
     return new Response(webStream, { headers });
   } catch (err) {
     console.error('Error downloading audio:', err);
-    return Response.json(
-      { error: 'No se pudo obtener el audio. Comprueba que el vídeo existe y no está restringido.' },
-      { status: 500 }
-    );
+    const is429 = (err as { statusCode?: number }).statusCode === 429;
+    const message = is429
+      ? 'YouTube está bloqueando la descarga. Configura la variable YOUTUBE_COOKIES con tu sesión.'
+      : 'No se pudo obtener el audio. Comprueba que el vídeo existe y no está restringido.';
+    return Response.json({ error: message }, { status: 500 });
   }
 }
