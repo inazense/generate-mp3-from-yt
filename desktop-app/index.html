@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <title>YouTube a MP3</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <header>
+      <h1>🎵 YouTube a MP3</h1>
+      <p class="subtitle">
+        Copia el enlace de un vídeo de YouTube, pégalo aquí abajo<br>
+        y pulsa el botón para descargar el audio
+      </p>
+    </header>
+
+    <main>
+
+      <!-- INPUT ROW: anotación izquierda + campo URL + espaciador -->
+      <div class="input-row">
+
+        <div class="annotation annotation-left">
+          <p class="annotation-text">Aquí pega el enlace<br>de youtube, papá</p>
+          <!-- Flecha curvada apuntando a la derecha, hacia el campo -->
+          <svg class="arrow" viewBox="0 0 90 55" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M 8,50 C 8,8 72,8 82,28"
+              fill="none" stroke="#BBBBBB" stroke-width="2.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 70,20 L 84,28 L 70,36"
+              fill="none" stroke="#BBBBBB" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+
+        <input
+          type="url"
+          id="url-input"
+          placeholder="https://www.youtube.com/watch?v=..."
+          autocomplete="off"
+          spellcheck="false"
+        >
+
+        <!-- Espaciador para alinear input con el botón -->
+        <div class="side-spacer"></div>
+
+      </div>
+
+      <!-- BUTTON ROW: espaciador + botón + anotación derecha -->
+      <div class="button-row">
+
+        <!-- Espaciador para alinear botón con el input -->
+        <div class="side-spacer"></div>
+
+        <button id="download-btn">
+          <span id="btn-icon">⬇</span>
+          <span id="btn-text">Descargar MP3</span>
+        </button>
+
+        <div class="annotation annotation-right">
+          <!-- Flecha curvada apuntando a la izquierda, hacia el botón -->
+          <svg class="arrow" viewBox="0 0 90 55" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M 82,50 C 82,8 18,8 8,28"
+              fill="none" stroke="#BBBBBB" stroke-width="2.5"
+              stroke-linecap="round"
+            />
+            <path
+              d="M 20,20 L 6,28 L 20,36"
+              fill="none" stroke="#BBBBBB" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"
+            />
+          </svg>
+          <p class="annotation-text">Dale aquí para convertir<br>y descargar el audio</p>
+        </div>
+
+      </div>
+
+      <!-- ÁREA DE ESTADO -->
+      <div id="status-area">
+        <div id="progress-bar-wrap" class="hidden">
+          <div id="progress-bar"></div>
+        </div>
+        <p id="status-msg"></p>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

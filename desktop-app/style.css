@@ -1,0 +1,228 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: #FFFAF4;
+  color: #222;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 32px 36px 24px;
+}
+
+/* ── CABECERA ─────────────────────────────────────── */
+
+header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+h1 {
+  font-size: 34px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #888;
+  line-height: 1.6;
+}
+
+/* ── MAIN CONTENT ──────────────────────────────────── */
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* ── ANOTACIONES (los textos con flechas) ──────────── */
+
+.side-spacer {
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.annotation {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  flex-shrink: 0;
+  gap: 6px;
+}
+
+.annotation-left {
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.annotation-right {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.annotation-text {
+  font-size: 13px;
+  color: #AAAAAA;
+  font-style: italic;
+  line-height: 1.5;
+  flex-shrink: 1;
+}
+
+.annotation-left .annotation-text {
+  text-align: right;
+}
+
+.annotation-right .annotation-text {
+  text-align: left;
+}
+
+.arrow {
+  width: 75px;
+  height: 46px;
+  flex-shrink: 0;
+}
+
+/* ── FILA DEL INPUT ──────────────────────────────── */
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+#url-input {
+  flex: 1;
+  height: 58px;
+  font-size: 17px;
+  padding: 0 18px;
+  border: 2px solid #DDD;
+  border-radius: 12px;
+  outline: none;
+  background: #FFFFFF;
+  color: #111;
+  transition: border-color 0.2s;
+}
+
+#url-input:focus {
+  border-color: #E53935;
+  box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.10);
+}
+
+#url-input::placeholder {
+  color: #C8C8C8;
+  font-size: 14px;
+}
+
+/* ── FILA DEL BOTÓN ──────────────────────────────── */
+
+.button-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+#download-btn {
+  flex: 1;
+  height: 62px;
+  font-size: 21px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: #E53935;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: background 0.18s, transform 0.1s, box-shadow 0.18s;
+  box-shadow: 0 4px 14px rgba(229, 57, 53, 0.30);
+  letter-spacing: 0.2px;
+}
+
+#download-btn:hover:not(:disabled) {
+  background: #C62828;
+  box-shadow: 0 6px 18px rgba(229, 57, 53, 0.38);
+}
+
+#download-btn:active:not(:disabled) {
+  transform: scale(0.975);
+}
+
+#download-btn:disabled {
+  background: #CCC;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#btn-icon {
+  font-size: 22px;
+}
+
+/* ── ÁREA DE ESTADO ──────────────────────────────── */
+
+#status-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding-top: 4px;
+}
+
+#progress-bar-wrap {
+  width: 100%;
+  height: 8px;
+  background: #E8E8E8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#progress-bar-wrap.hidden {
+  display: none;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #E53935, #FF7043);
+  border-radius: 4px;
+  transition: width 0.35s ease;
+}
+
+#status-msg {
+  font-size: 16px;
+  color: #888;
+  text-align: center;
+  line-height: 1.4;
+  min-height: 22px;
+  transition: color 0.2s;
+}
+
+#status-msg.success {
+  color: #2E7D32;
+  font-weight: 600;
+}
+
+#status-msg.error {
+  color: #C62828;
+  font-weight: 600;
+}
